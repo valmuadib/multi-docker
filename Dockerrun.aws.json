@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name" : "client",
+            "image": "valmuadib/react-multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name" : "nginx",
+            "image": "valmuadib/react-multi-nginx",
+            "essential": true,
+            "portMappings" : [
+                {
+                    "hostPort": 80,
+                    "containerPort":80
+                }
+            ],
+            "links": ["client", "server"]
+        },
+        {
+            "name" : "server",
+            "image": "valmuadib/react-multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name" : "worker",
+            "image": "valmuadib/react-multi-worker",
+            "hostname": "worker",
+            "essential": false
+        }
+
+    ]
+}
